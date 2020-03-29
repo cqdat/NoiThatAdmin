@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Chủng loại sản phẩm";
 }
 
 <div id="page-heading">
@@ -11,7 +11,7 @@
 
     </ol>
 
-    <h1>Forms</h1>
+    <h1>Loại Sản phẩm</h1>
     <div class="options">
         <div class="btn-toolbar">
 
@@ -68,7 +68,11 @@
 
 @section scripts{
     <script type="text/javascript">
+       
     $(document).ready(function () {
+         $.ajaxSetup({
+                cache: false
+         });
 
         filter();
 
@@ -104,4 +108,4 @@
 
     }
     </script>
-    }
+}

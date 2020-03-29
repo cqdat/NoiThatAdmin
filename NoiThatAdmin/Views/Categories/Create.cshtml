@@ -4,15 +4,28 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Thêm mới chủng loại Sản phẩm</li>
+
+        </ol>
+
+        <h1>Thêm mới</h1>
+        <div class="options">
+            <div class="btn-toolbar">
+
+                <a href="/Categories/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+            </div>
+        </div>
+    </div>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })

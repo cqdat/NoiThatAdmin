@@ -18,7 +18,8 @@ namespace NoiThatAdmin.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            //return View(db.Categories.ToList());
+            return View();
         }
         public ActionResult _PartialIndex(int? pageNumber, int? pageSize, string TenChungLoai)
         {
@@ -47,7 +48,6 @@ namespace NoiThatAdmin.Controllers
             if (Request.IsAjaxRequest())
             {
                 return PartialView("~/Views/Categories/_PartialIndex.cshtml", lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
-
             }
             return View(lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
