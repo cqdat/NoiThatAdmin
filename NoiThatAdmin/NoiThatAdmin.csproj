@@ -140,6 +140,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\Category.cs" />
+    <Compile Include="Models\DataModels\TanThoiEntities.cs" />
+    <Compile Include="Models\FilesHelper.cs" />
+    <Compile Include="Models\ImageHandler.cs" />
+    <Compile Include="Models\JsonFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Helpers.cs" />
   </ItemGroup>
@@ -381,6 +386,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Media\Upload\0d6b7611-2cb6-49d0-9527-f7e3411bea84_2014ebd9ebce-8c8e-46ec-8fc4-4a27a8a7a544.gif" />
+    <Content Include="Media\Upload\4351de4e-e990-467b-a408-48f41683df97_7887_159309407575176_1944603233_n.jpg" />
+    <Content Include="Media\Upload\73cbf165-3031-4232-991b-9823d1feb55d_79b7908622a16186f74b201ef0aeaceb_46199219_014quachdaicahocadoc.jpg" />
+    <Content Include="Media\Upload\b07cbef2-e339-4331-8f8c-59e4825405c6_7887_159309407575176_1944603233_n.jpg" />
+    <Content Include="Media\Upload\e5aa4cd2-43d8-47ee-b8d8-6735630d4e13_987_451615978229485_515745930_n.jpg" />
+    <Content Include="Media\Upload\thumbs\4351de4e-e990-467b-a408-48f41683df97_7887_159309407575176_1944603233_n.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\73cbf165-3031-4232-991b-9823d1feb55d_79b7908622a16186f74b201ef0aeaceb_46199219_014quachdaicahocadoc.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\b07cbef2-e339-4331-8f8c-59e4825405c6_7887_159309407575176_1944603233_n.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\e5aa4cd2-43d8-47ee-b8d8-6735630d4e13_987_451615978229485_515745930_n.80x80.jpg" />
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-fullscreen.js" />
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-fullscreen.min.js" />
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-indicator.js" />
@@ -460,10 +474,17 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FormInput.cshtml" />
+    <Content Include="Views\ProductImage\Index.cshtml" />
+    <Content Include="Views\ProductImage\_form.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\_PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
