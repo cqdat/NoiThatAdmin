@@ -1,0 +1,107 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Danh sách chủng loại Sản phẩm</li>
+
+    </ol>
+
+    <h1>Forms</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+
+            <a href="/Categories/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-1">
+                Hiện thị<br />
+                <select name="sample_2_length" aria-controls="sample_2" class="form-control input-xsmall input-inline select2-offscreen" tabindex="-1" title="" id="ddlPageSize">
+                    <option value="5">5 dòng</option>
+                    <option value="10">10 dòng</option>
+                    <option value="1" selected>15 dòng</option>
+                    <option value="20">20 dòng</option>
+                    <option value="-1">Tất cả</option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                Tên chủng loại<br />
+                <input type="text" id="txtTenChungLoai" name="txtTenChungLoai" class="form-control txtSearch" placeholder="Nhập tên...">
+            </div>
+            <div class="col-xs-2">
+                Tên chủng loại<br />
+                <input type="text" class="form-control" placeholder=".col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <br />
+                <input type="text" class="form-control" placeholder=".col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <br />
+                <input type="text" class="form-control" placeholder=".col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <br />
+                <input type="text" class="form-control" placeholder=".col-xs-2">
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        @*@{ Html.RenderPartial("_Alerts"); }*@
+        <div class="panel-body" style="padding:0px;">
+
+            <div class="row" id="season-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        filter();
+
+        $('body').on('change', '#ddlPageSize', function () {
+            filter();
+        });
+
+        //textbox name
+        $('.txtSearch').on('input', function () {
+            filter();
+        });
+
+    });
+
+    function filter() {
+
+        var TenChungLoai = $("#txtTenChungLoai").val();
+
+        $.ajax({
+            //url: '/BDS_TinTuc/_PartialIndex',
+            url: '@Url.Action("_PartialIndex", "Categories", new { area = "Cpanel" })',
+            data: {
+                pageSize: parseInt($('#ddlPageSize').val()),
+                TenChungLoai: TenChungLoai,
+            },
+            method: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('#season-list').html(data);
+                $("#lbl_Message").html("");
+            }
+        });
+
+    }
+    </script>
+    }
