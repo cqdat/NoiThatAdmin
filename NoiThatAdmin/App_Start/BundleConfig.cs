@@ -40,10 +40,11 @@ namespace NoiThatAdmin
                       "~/assets/plugins/charts-flot/jquery.flot.resize.min.js",
                       "~/assets/plugins/charts-flot/jquery.flot.orderBars.min.js",
                       "~/assets/plugins/pulsate/jQuery.pulsate.min.js",
-                      "~/assets/demo/demo-index.js",
+                      //"~/assets/demo/demo-index.js",
                       "~/assets/js/placeholdr.js",
                       "~/assets/js/application.js",
-                      "~/assets/demo/demo.js"
+                      "~/assets/demo/demo.js",
+                        "~/Scripts/client.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
