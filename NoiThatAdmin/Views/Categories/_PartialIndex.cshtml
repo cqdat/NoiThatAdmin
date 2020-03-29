@@ -19,9 +19,9 @@
                         <th style="width:30px">STT</th>
                         <th>Tên Chủng Loại</th>
                         <th>Danh Mục Cha</th>
-                        <th>Hiện Thị Menu Trang Chủ</th>
-                        <th>Ẩn/Hiện Website</th>
-                        <th>Thứ Tự</th>
+                        <th style="width:60px">Ẩn/hiện <br />Menu Trang Chủ</th>
+                        <th style="width:50px">Ẩn/Hiện <br />Website</th>
+                        <th style="width:40px">Thứ Tự</th>
                         <th>SEO Keywords</th>
                         <th></th>
                     </tr>
@@ -41,7 +41,7 @@
                             <td>
                                 @h.GetParentMenu(item.Parent)
                             </td>
-                            <td>
+                            <td style="width:60px">
                                 
                                 @if (item.DisplayMenu == true)
                                 {
@@ -54,7 +54,7 @@
 
 
                             </td>
-                            <td>
+                            <td style="width:50px">
                                 @if (item.IsActive == true)
                                 {
                                     <span class="badge badge-success">Hiện thị</span>
@@ -64,7 +64,7 @@
                                     <span class="badge">Ẩn</span>
                                 }
                             </td>
-                            <td>
+                            <td style="width:40px">
                                 @Html.DisplayFor(modelItem => item.Sort)
                             </td>
 
@@ -90,10 +90,7 @@
                {
                    pageNumber,
                    pageSize = ViewBag.pageSize,
-
                    TenChungLoai = ViewBag.TenChungLoai,
-
-
                }),
                 PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
                 new PagedListRenderOptions()
@@ -109,7 +106,5 @@
         </div>
 
         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
-
-
     </div>
 </div>
