@@ -136,11 +136,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Category.cs" />
     <Compile Include="Models\DataModels\TanThoiEntities.cs" />
+    <Compile Include="Models\FilesHelper.cs" />
+    <Compile Include="Models\ImageHandler.cs" />
+    <Compile Include="Models\JsonFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Helpers.cs" />
   </ItemGroup>
@@ -361,15 +365,52 @@
     <Content Include="assets\plugins\pulsate\jQuery.pulsate.min.js" />
     <Content Include="assets\plugins\quicksearch\jquery.quicksearch.min.js" />
     <Content Include="assets\plugins\sparklines\jquery.sparklines.min.js" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.min.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.min.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.min.css" />
+    <Content Include="Content\blueimp-gallery2\img\error.png" />
+    <Content Include="Content\blueimp-gallery2\img\error.svg" />
+    <Content Include="Content\blueimp-gallery2\img\loading.gif" />
+    <Content Include="Content\blueimp-gallery2\img\play-pause.png" />
+    <Content Include="Content\blueimp-gallery2\img\play-pause.svg" />
+    <Content Include="Content\blueimp-gallery2\img\video-play.png" />
+    <Content Include="Content\blueimp-gallery2\img\video-play.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Media\Upload\0d6b7611-2cb6-49d0-9527-f7e3411bea84_2014ebd9ebce-8c8e-46ec-8fc4-4a27a8a7a544.gif" />
+    <Content Include="Media\Upload\4351de4e-e990-467b-a408-48f41683df97_7887_159309407575176_1944603233_n.jpg" />
+    <Content Include="Media\Upload\73cbf165-3031-4232-991b-9823d1feb55d_79b7908622a16186f74b201ef0aeaceb_46199219_014quachdaicahocadoc.jpg" />
+    <Content Include="Media\Upload\b07cbef2-e339-4331-8f8c-59e4825405c6_7887_159309407575176_1944603233_n.jpg" />
+    <Content Include="Media\Upload\e5aa4cd2-43d8-47ee-b8d8-6735630d4e13_987_451615978229485_515745930_n.jpg" />
+    <Content Include="Media\Upload\thumbs\4351de4e-e990-467b-a408-48f41683df97_7887_159309407575176_1944603233_n.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\73cbf165-3031-4232-991b-9823d1feb55d_79b7908622a16186f74b201ef0aeaceb_46199219_014quachdaicahocadoc.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\b07cbef2-e339-4331-8f8c-59e4825405c6_7887_159309407575176_1944603233_n.80x80.jpg" />
+    <Content Include="Media\Upload\thumbs\e5aa4cd2-43d8-47ee-b8d8-6735630d4e13_987_451615978229485_515745930_n.80x80.jpg" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-fullscreen.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-fullscreen.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-indicator.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-indicator.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-video.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-video.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-vimeo.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-vimeo.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-youtube.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-youtube.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-helper.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-helper.min.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.js" />
+    <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\fonts\font-awesome\fonts\Baobinh.net.url" />
@@ -383,12 +424,36 @@
     <Content Include="assets\fonts\glyphicons\font\glyphicons-halflings-regulard41d.eot" />
     <Content Include="assets\js\images\Baobinh.net.url" />
     <Content Include="assets\plugins\datatables\Baobinh.net.url" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-fullscreen.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-indicator.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-video.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-vimeo.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery-youtube.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\blueimp-helper.min.js.map" />
+    <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery.FileUpload\canvas-to-blob.min.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-video.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\load-image.all.min.js" />
+    <Content Include="Scripts\jQuery.FileUpload\tmpl.min.js" />
+    <Content Include="Scripts\jQuery.FileUpload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -409,6 +474,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FormInput.cshtml" />
+    <Content Include="Views\ProductImage\Index.cshtml" />
+    <Content Include="Views\ProductImage\_form.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
@@ -465,6 +532,13 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

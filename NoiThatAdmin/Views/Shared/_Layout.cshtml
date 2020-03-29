@@ -24,11 +24,11 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    
-    
+
+
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <a id="leftmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
-        
+
 
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="index.html">Avant</a>
@@ -225,6 +225,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
-   
+    @Scripts.Render("~/bundles/bundleupload")   
+    @Scripts.Render("~/bundles/Blueimp-Gallerry2")
+
 </body>
 </html>
