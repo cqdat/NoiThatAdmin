@@ -1,4 +1,4 @@
-/*
+﻿/*
  * jQuery File Upload User Interface Plugin 9.6.1
  * https://github.com/blueimp/jQuery-File-Upload
  *
@@ -712,10 +712,13 @@
 
 var $form = null;
 $(function () {
+
     $form = $('#fileupload').fileupload({
         dataType: 'json',
-        maxFileSize: 20000000,
-        maxNumberOfFiles: 10,
+        maxFileSize: 20000000, 
+        maxNumberOfFiles: 10,  
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
     });
+
 });
+
