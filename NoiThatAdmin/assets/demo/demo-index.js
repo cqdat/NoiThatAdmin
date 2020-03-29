@@ -622,13 +622,14 @@ function renderCalendar(headertype) {
         }
     });
 
-    $( ".panel-tasks" ).sortable({placeholder: 'item-placeholder'});
-    $('.panel-tasks input[type="checkbox"]').click(function(event) {
-        if(this.checked) {
-            $(this).next(".task-description").addClass("done");
-        } else {
-            $(this).next(".task-description").removeClass("done");
-        }
-    });
+    //$(".panel-tasks").sortable({ placeholder: 'item-placeholder' });
+
+    //$('.panel-tasks input[type="checkbox"]').click(function(event) {
+    //    if(this.checked) {
+    //        $(this).next(".task-description").addClass("done");
+    //    } else {
+    //        $(this).next(".task-description").removeClass("done");
+    //    }
+    //});
 
 }
