@@ -52,7 +52,8 @@ namespace NoiThatAdmin
                       "~/assets/plugins/fullcalendar/fullcalendar.css",
                       "~/assets/plugins/form-markdown/css/bootstrap-markdown.min.css",
                       "~/assets/plugins/codeprettifier/prettify.css",
-                      "~/assets/plugins/form-toggle/toggles.css"));
+                      "~/assets/plugins/form-toggle/toggles.css",
+                      "~/Content/Site.css"));
 
             bundles.Add(new StyleBundle("~/Content/bundleupload").Include(
                 "~/Content/jQuery.FileUpload/css/jquery.fileupload.css",

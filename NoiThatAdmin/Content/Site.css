@@ -66,3 +66,8 @@
         #season-list .card--table2 thead {
             display: table-row;
         }
+
+        .labelRedColor{
+            color:#ff0000;
+            text-align:left !important;
+        }

@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using NoiThatAdmin.Models.DataModels;
 using PagedList;
+using NoiThatAdmin.Utilities;
 
 namespace NoiThatAdmin.Controllers
 {
     public class CategoriesController : Controller
     {
         private TanThoiEntities db = new TanThoiEntities();
+        Helpers h = new Helpers();
 
         // GET: Categories
         public ActionResult Index()
@@ -70,6 +72,7 @@ namespace NoiThatAdmin.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
+            ViewData["ListCate"] = db.Categories.ToList();
             return View();
         }
 
@@ -82,6 +85,8 @@ namespace NoiThatAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+                category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -102,6 +107,7 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["ListCate"] = db.Categories.ToList();
             return View(category);
         }
 
@@ -114,6 +120,7 @@ namespace NoiThatAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
