@@ -37,21 +37,24 @@
                 <input type="text" id="txtTenChungLoai" name="txtTenChungLoai" class="form-control txtSearch" placeholder="Nhập tên...">
             </div>
             <div class="col-xs-2">
-                Tên chủng loại<br />
-                <input type="text" class="form-control" placeholder=".col-xs-2">
+                Danh Mục Cha<br />
+
+                <select class="form-control drChange" id="ParentId" name="ParentId">
+                    <option value="">Tất cả</option>
+                    <option value="0">Menu Cha</option>
+                    @foreach (var i in (List<NoiThatAdmin.Models.DataModels.Category>)ViewData["ListCate"])
+                    {
+                        <option value="@i.CategoryID">@i.CategoryName</option>
+                    }
+
+                </select>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-4">
+                Tìm theo từ khóa 
                 <br />
-                <input type="text" class="form-control" placeholder=".col-xs-2">
+                <input type="text" id="SEOKeywords" class="form-control txtSearch" placeholder="nhập từ khóa">
             </div>
-            <div class="col-xs-2">
-                <br />
-                <input type="text" class="form-control" placeholder=".col-xs-2">
-            </div>
-            <div class="col-xs-2">
-                <br />
-                <input type="text" class="form-control" placeholder=".col-xs-2">
-            </div>
+            
         </div>
     </div>
     <div class="panel panel-primary">
@@ -68,7 +71,7 @@
 
 @section scripts{
     <script type="text/javascript">
-       
+
     $(document).ready(function () {
          $.ajaxSetup({
                 cache: false
@@ -85,18 +88,26 @@
             filter();
         });
 
+        //Drop change Dept
+            $('.drChange').change(function () {
+                filter();
+            });
+
     });
 
     function filter() {
 
         var TenChungLoai = $("#txtTenChungLoai").val();
-
+        var DanhMucCha = $("#ParentId").val();
+        var SEOKeywords = $("#SEOKeywords").val();
         $.ajax({
             //url: '/BDS_TinTuc/_PartialIndex',
             url: '@Url.Action("_PartialIndex", "Categories", new { area = "Cpanel" })',
             data: {
                 pageSize: parseInt($('#ddlPageSize').val()),
                 TenChungLoai: TenChungLoai,
+                DanhMucCha: DanhMucCha,
+                SEOKeywords:SEOKeywords
             },
             method: 'GET',
             dataType: 'html',

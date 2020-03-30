@@ -20,10 +20,11 @@ namespace NoiThatAdmin.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            //return View(db.Categories.ToList());
+            ViewData["ListCate"] = db.Categories.ToList();
             return View();
         }
-        public ActionResult _PartialIndex(int? pageNumber, int? pageSize, string TenChungLoai)
+        public ActionResult _PartialIndex(int? pageNumber, int? pageSize, string TenChungLoai, int? DanhMucCha,
+                                          string SEOKeywords)
         {
             TenChungLoai = TenChungLoai ?? "";
             ViewBag.TenChungLoai = TenChungLoai;
@@ -42,6 +43,18 @@ namespace NoiThatAdmin.Controllers
                 lstCates = lstCates.Where(s => s.CategoryName.ToUpper().Contains(TenChungLoai.ToUpper())).ToList();
             }
             ViewBag.TenChungLoai = TenChungLoai;
+
+            if (!string.IsNullOrEmpty(DanhMucCha.ToString()))
+            {
+                lstCates = lstCates.Where(s => s.Parent == DanhMucCha).ToList();
+            }
+            ViewBag.DanhMucCha = DanhMucCha;
+
+            if (!string.IsNullOrEmpty(SEOKeywords))
+            {
+                lstCates = lstCates.Where(s => s.SEOKeywords.ToUpper().Contains(SEOKeywords.ToUpper())).ToList();
+            }
+            ViewBag.SEOKeywords = SEOKeywords;
 
             lstCates = lstCates.OrderBy(s => s.Sort).ToList();
             ViewBag.STT = pageNumber * pageSize - pageSize + 1;
