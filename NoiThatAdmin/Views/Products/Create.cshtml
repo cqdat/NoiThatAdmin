@@ -1,0 +1,296 @@
+﻿@model NoiThatAdmin.Models.DataModels.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html">Danh sách SP</a></li>
+            <li class="active">Tạo Mới</li>
+        </ol>
+
+        <h1>Tạo mới Sản phẩm</h1>
+        <div class="options">
+            <div class="btn-toolbar">
+                <div class="btn-group hidden-xs">
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cloud-download"></i><span class="hidden-sm"> Export as  </span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Text File (*.txt)</a></li>
+                        <li><a href="#">Excel File (*.xlsx)</a></li>
+                        <li><a href="#">PDF File (*.pdf)</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-default"><i class="fa fa-cog"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-midnightblue">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @*<img src="assets/demo/avatar/johansson.png" alt="" class="pull-left" style="margin: 0 20px 20px 0">*@
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductCode, "Mã SP", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductName, "Tên SP", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CategoryIDParent, "Danh Mục Cha", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.DropDownList("CategoryIDParent", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CategoryIDParent, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CategoryID, "Chủng loại SP", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Images, "Hình đại diện", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            <input type="file" id="HinhAnh" name="HinhAnh" />
+                                            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IsSale, "Sản phẩm Sale", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <select class="form-control" id="IsSale" name="IsSale">
+
+                                                    <option selected value="true">Có</option>
+                                                    <option value="false">Không</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(model => model.IsSale, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        @Html.LabelFor(model => model.IsNew, "Sản phẩm mới", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <select class="form-control" id="IsNew" name="IsNew">
+
+                                                    <option selected value="true">Có</option>
+                                                    <option value="false">Không</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(model => model.IsNew, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InStock, "Còn hàng", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <select class="form-control" id="InStock" name="InStock">
+
+                                                    <option selected value="true">Còn hàng</option>
+                                                    <option value="false">Tạm hết hàng</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(model => model.InStock, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        @Html.LabelFor(model => model.IsActive, "Hiện thị Website", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <select class="form-control" id="IsActive" name="IsActive">
+                                                    <option selected value="true">Hiện thị</option>
+                                                    <option value="false">Ẩn</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Rating, "Đánh giá *", htmlAttributes: new { @class = "control-label col-md-3" })
+
+                                        <div class="col-md-3">
+                                            <select class="form-control" id="Rating" name="Rating">
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option selected value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                                        </div>
+                                        @Html.LabelFor(model => model.CountView, "Lượt xem", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.CountView, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CountView, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            @*Right*@
+                            <div class="col-md-6">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ShortDescription, "Mô Tả ngắn", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" rows="7"></textarea>
+                                            @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <h4 style="border-bottom:1px solid #808080">SEO Google</h4>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SEOTitle, "Page Title", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.SEOTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SEOTitle, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SEOKeywords, "SEO Keywords", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.SEOKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SEOKeywords, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" rows="4"></textarea>
+                                            @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tab-container tab-success">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#home1" data-toggle="tab">Bài Viết Sản phẩm</a></li>
+                                        <li class=""><a href="#profile1" data-toggle="tab">Assigned Projects</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane clearfix active" id="home1">
+                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="tab-pane" id="profile1">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+                                                            <th width="35%">Project Title</th>
+                                                            <th width="35%">Due Date</th>
+                                                            <th width="25%">Progress</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>Lorem ipsum</td>
+                                                            <td>Nov 5, 2013</td>
+                                                            <td>
+                                                                <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                    <div class="progress-bar progress-bar-info" style="width: 30%;"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Dignissimos voluptas</td>
+                                                            <td>Nov 10, 2013</td>
+                                                            <td>
+                                                                <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                    <div class="progress-bar progress-bar-danger" style="width: 55%;"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>Tenetur ex ea dignissimos</td>
+                                                            <td>Nov 11, 2013</td>
+                                                            <td>
+                                                                <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                    <div class="progress-bar progress-bar-success" style="width: 35%;"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>Quo dolorem maxime</td>
+                                                            <td>Nov 21, 2013</td>
+                                                            <td>
+                                                                <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                    <div class="progress-bar progress-bar-primary" style="width: 20%;"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td>Dsperiores</td>
+                                                            <td>Nov 17, 2013</td>
+                                                            <td>
+                                                                <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                    <div class="progress-bar progress-bar-inverse" style="width: 70%;"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+@section scripts{
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace("Content",
+            {
+
+            });
+        CKFinder.setupCKEditor(null, '/ckfinder')
+    </script>
+
+}
