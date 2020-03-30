@@ -1,0 +1,110 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using NoiThatAdmin.Models.DataModels
+@using NoiThatAdmin.Utilities;
+@model IPagedList<NoiThatAdmin.Models.DataModels.Category>
+@{
+    int stt = ViewBag.STT;
+    Helpers h = new Helpers();
+}
+
+<span style="color:#ff0000; font-weight:bold">Total: @ViewBag.TotalRow row(s)</span>
+<div class="frame">
+
+    <div class="card card--table1">
+        <div class="card-hScroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:30px">STT</th>
+                        <th>Tên Chủng Loại</th>
+                        <th>Danh Mục Cha</th>
+                        <th style="width:60px">Ẩn/hiện <br />Menu Trang Chủ</th>
+                        <th style="width:50px">Ẩn/Hiện <br />Website</th>
+                        <th style="width:40px">Thứ Tự</th>
+                        <th>SEO Keywords</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+            </table>
+
+            <div class="card-vScroll">
+                <table class="table table-striped table-hover xcont">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                           <td style="width:30px">@stt</td>
+                            <td>
+                                @item.CategoryName
+                            </td>
+                            <td>
+                                @h.GetParentMenu(item.Parent)
+                            </td>
+                            <td style="width:60px">
+                                
+                                @if (item.DisplayMenu == true)
+                                {
+                                    <span class="badge badge-success">Hiện thị</span>
+                                }
+                                else
+                                {
+                                    <span class="badge">Ẩn</span>
+                                }
+
+
+                            </td>
+                            <td style="width:50px">
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="badge badge-success">Hiện thị</span>
+                                }
+                                else
+                                {
+                                    <span class="badge">Ẩn</span>
+                                }
+                            </td>
+                            <td style="width:40px">
+                                @Html.DisplayFor(modelItem => item.Sort)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SEOKeywords)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                </table>
+            </div>
+        </div>
+
+        <div class="dataTables_paginate paging_bootstrap_full_number pull-right" id="sample_1_paginate">
+            @Html.PagedListPager(Model, pageNumber => Url.Action("_PartialIndex",
+               new
+               {
+                   pageNumber,
+                   pageSize = ViewBag.pageSize,
+                   TenChungLoai = ViewBag.TenChungLoai,
+               }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayItemSliceAndTotal = true
+                }, new AjaxOptions()
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "season-list"
+                }))
+        </div>
+
+        <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+    </div>
+</div>

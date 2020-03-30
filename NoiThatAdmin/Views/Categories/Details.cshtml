@@ -1,0 +1,109 @@
+﻿@model NoiThatAdmin.Models.DataModels.Category
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Details";
+    Helpers h = new Helpers();
+}
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Chi tiết @Model.CategoryName</li>
+
+    </ol>
+
+    <h1>Chi tiết</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+
+            <a href="/Categories/Edit/@Model.CategoryID" class="btn btn-success btn-label"><i class="fa fa-edit"></i>Chỉnh sửa</a>
+            <a href="/Categories/" class="btn btn-primary">Quay Lại</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-midnightblue">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="assets/demo/avatar/johansson.png" alt="" class="pull-left" style="margin: 0 20px 20px 0">
+                            <div class="table-responsive">
+                                <h3>Tên: <strong>@Model.CategoryName</strong></h3>
+                                <table class="table table-condensed">
+
+                                    <tbody>
+                                        <tr>
+                                            <td>Danh mục</td>
+                                            <td><a href="#">@h.GetParentMenu(Model.Parent)</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hiện thị Trên Menu</td>
+                                            <td>
+                                                @if (Model.DisplayMenu == true)
+                                                {
+                                                    <span class="badge badge-success">Hiện thị</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">Ẩn</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ẩn/Hiện</td>
+                                            <td>
+                                                @if (Model.IsActive == true)
+                                                {
+                                                    <span class="badge badge-success">Hiện thị</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">Ẩn</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Xếp thứ tự</td>
+                                            <td>@Model.Sort</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>SEO Google</h3>
+                            <table class="table table-condensed">
+
+                                <tbody>
+                                    <tr>
+                                        <td>Tiêu đề trang</td>
+                                        <td><a href="#">@Model.SEOTitle</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>URL Thân thiện</td>
+                                        <td>
+                                            @Model.SEOUrlRewrite
+                                        </td>
+                                    </tr>
+                                    
+
+                                </tbody>
+                            </table>
+                            <p><strong>Google Keywords</strong>: @Model.SEOKeywords </p>
+                            <p><strong>Google Meta Description</strong>: @Model.SEOMetadescription </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h3 style="border-bottom:1px solid #808080">Slide images</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

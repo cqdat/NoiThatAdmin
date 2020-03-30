@@ -1,0 +1,158 @@
+﻿@model NoiThatAdmin.Models.DataModels.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Thêm mới chủng loại Sản phẩm</li>
+
+        </ol>
+
+        <h1>Chỉnh sửa</h1>
+        <div class="options">
+
+            <div class="btn-toolbar">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+                <a href="/Categories/" class="btn btn-primary">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-container tab-danger">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home1" data-toggle="tab">Thông tin chung</a></li>
+                <li class=""><a href="#profile1" data-toggle="tab">Slide Images</a></li>
+
+            </ul>
+            <div class="tab-content" style="background-color:#ffffff">
+                <div class="tab-pane active" id="home1">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CategoryID)
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryName, "Tên Chủng Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Parent, "Danh Mục Cha", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                <select class="form-control" id="Parent" name="Parent">
+                                    <option value="0">Đặt làm Menu Cha</option>
+
+                                    @foreach (var i in (List<NoiThatAdmin.Models.DataModels.Category>)ViewData["ListCate"])
+                                    {
+                                        if (Model.Parent == i.CategoryID)
+                                        {
+                                            <option selected value="@i.CategoryID">@i.CategoryName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@i.CategoryID">@i.CategoryName</option>
+                                        }
+
+                                    }
+
+                                </select>
+
+                                @Html.ValidationMessageFor(model => model.Parent, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DisplayMenu, "Hiện thị Menu", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                <div class="checkbox">
+                                    <select class="form-control" id="DisplayMenu" name="DisplayMenu">
+
+                                        <option value="true">Hiện Thị</option>
+                                        <option value="false">Ẩn</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.DisplayMenu, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @Html.LabelFor(model => model.IsActive, "Ẩn/Hiện", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                <div class="checkbox">
+                                    <select class="form-control" id="IsActive" name="IsActive">
+
+                                        <option value="true">Hiện Thị</option>
+                                        <option value="false">Ẩn</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sort, "Vị Trí", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Sort, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="control-label col-md-4 labelRedColor">Nhập số nguyên 1, 2, 3,...</label>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                <h4 style="border-bottom:1px solid #808080">SEO GOOGLE</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SEOTitle, "SEO Title Page", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SEOTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SEOTitle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SEOKeywords, "SEO Keywords", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SEOKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SEOKeywords, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="3">@Model.SEOMetadescription</textarea>
+                                @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="profile1"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores porro eveniet debitis quas sed harum nobis libero voluptatibus dolorum odio at veniam aut id corrupti hic esse quisquam fugiat. Asperiores in eveniet sapiente error fuga tenetur ex ea dignissimos voluptas ab molestiae eos totam quo dolorem maxime illo neque quia itaque.</p></div>
+            </div>
+        </div>
+    </div>
+
+
+}
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#CategoryName").focusout(function () {
+                var CateName = $("#CategoryName").val();
+                $("#SEOTitle").val(CateName);
+            });
+        });
+    </script>
+}

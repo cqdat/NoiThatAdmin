@@ -1,25 +1,73 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/*Customs table list*/
+#season-list {
+    margin-left: 0px;
+    margin-right: 0px
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+    #season-list .table tr td i {
+        font-size: 15px;
+        cursor: pointer;
+        margin-right: 8px;
+        color: #408cea;
+    }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
+    #season-list table {
+        border-collapse: collapse;
+        background: white;
+        table-layout: fixed;
+        width: 100%;
+    }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+        #season-list table th, #season-list table td {
+            padding: 5px !important;
+            border: 1px solid #ddd;
+            width: 125px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+        }
 
-}
+    #season-list .card {
+        background: #eee;
+    }
+
+    #season-list .card-hScroll {
+        overflow: auto;
+        width: 100%;
+        min-height: 350px;
+    }
+
+    #season-list .card-vScroll {
+        /*overflow-y: auto;*/
+        /*overflow-x: hidden;*/
+        /*height: 300px;*/
+        height: 100%;
+        background: #ddd;
+    }
+
+    #season-list .card--table2 {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+        #season-list .card--table2 th, #season-list .card--table2 td {
+            width: auto;
+            min-width: 125px;
+        }
+
+        #season-list .card--table2 tbody {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            display: block;
+            height: 200px;
+        }
+
+        #season-list .card--table2 thead {
+            display: table-row;
+        }
+
+        .labelRedColor{
+            color:#ff0000;
+            text-align:left !important;
+        }

@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Admin</title>
+    <title>@ViewBag.Title - Control Panel</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Avant">
     <meta name="author" content="The Red Team">
 
-    
+
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
@@ -21,14 +21,15 @@
     <!-- The following CSS are included as plugins and can be removed if unused-->
 
     @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/CSSModify")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    
-    
+
+
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <a id="leftmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
-        
+
 
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="index.html">Avant</a>
@@ -71,11 +72,11 @@
                     </form>
                 </li>
                 <li class="divider"></li>
-                <li><a href="/Home/Index/"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a href="/Home/Index/"><i class="fa fa-home"></i> <span>Trang Chủ</span></a></li>
                 <li>
-                    <a href="javascript:;"><i class="fa fa-th"></i> <span>Layout Options</span> </a>
+                    <a href="javascript:;"><i class="fa fa-th"></i> <span>Chủng loại Sản phẩm</span> </a>
                     <ul class="acc-menu">
-                        <li><a href="layout-grid.html"><span>Grids</span></a></li>
+                        <li><a href="/Categories/Index"><span>Danh sách</span></a></li>
                         <li><a href="layout-horizontal.html"><span>Horizontal Navigation</span></a></li>
                         <li><a href="layout-horizontal2.html"><span>Horizontal Navigation 2</span></a></li>
                         <li><a href="layout-fixed.html"><span>Fixed Boxed Layout</span></a></li>
@@ -225,6 +226,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
-   
+    @Scripts.Render("~/bundles/bundleupload")   
+    @Scripts.Render("~/bundles/Blueimp-Gallerry2")
+
 </body>
 </html>
