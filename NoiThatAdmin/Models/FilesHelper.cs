@@ -151,6 +151,7 @@ namespace NoiThatAdmin.Models
                 string pathOnServer = Path.Combine(StorageRoot);
                 string fileThumb = "";
 
+
                 guid = Guid.NewGuid().ToString();
 
                 var fullPath = Path.Combine(pathOnServer, Path.GetFileName(guid + "_" + file.FileName));
