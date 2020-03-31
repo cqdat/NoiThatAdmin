@@ -109,7 +109,7 @@ namespace NoiThatAdmin.Models
             return files;
         }
 
-        public void UploadAndShowResults(HttpContextBase ContentBase, List<ViewDataUploadFilesResult> resultList, int galleryid)
+        public void UploadAndShowResults(HttpContextBase ContentBase, List<ViewDataUploadFilesResult> resultList, int? productid)
         {
             var httpRequest = ContentBase.Request;
             System.Diagnostics.Debug.WriteLine(Directory.Exists(tempPath));
@@ -129,17 +129,17 @@ namespace NoiThatAdmin.Models
 
                 if (string.IsNullOrEmpty(headers["X-File-Name"]))
                 {
-                    UploadWholeFile(ContentBase, resultList, galleryid);
+                    UploadWholeFile(ContentBase, resultList, productid);
                 }
                 else
                 {
-                    UploadPartialFile(headers["X-File-Name"], ContentBase, resultList, galleryid);
+                    UploadPartialFile(headers["X-File-Name"], ContentBase, resultList, productid);
                 }
             }
         }
 
 
-        private void UploadWholeFile(HttpContextBase requestContext, List<ViewDataUploadFilesResult> statuses, int galleryid)
+        private void UploadWholeFile(HttpContextBase requestContext, List<ViewDataUploadFilesResult> statuses, int? productid)
         {
             string guid = "";
             var request = requestContext.Request;
@@ -205,7 +205,7 @@ namespace NoiThatAdmin.Models
 
 
 
-        private void UploadPartialFile(string fileName, HttpContextBase requestContext, List<ViewDataUploadFilesResult> statuses, int galleryid)
+        private void UploadPartialFile(string fileName, HttpContextBase requestContext, List<ViewDataUploadFilesResult> statuses, int? productid)
         {
             var request = requestContext.Request;
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");

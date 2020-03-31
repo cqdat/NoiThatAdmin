@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Information>
+
+@{
+    ViewBag.Title = "Information";
+}
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Danh sách thông tin chung</li>
+
+    </ol>
+
+    <h1>Thông Tin Chung</h1>
+    @*<div class="options">
+        <div class="btn-toolbar">
+            <a href="/information/create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>*@
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Định Danh
+                </th>
+                <th>
+                    Nội dung
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InfoCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InfoContent)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.InfoID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
