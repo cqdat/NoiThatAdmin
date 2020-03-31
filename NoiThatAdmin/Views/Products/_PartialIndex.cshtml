@@ -1,0 +1,134 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using NoiThatAdmin.Models.DataModels
+@using NoiThatAdmin.Utilities;
+@model IPagedList<NoiThatAdmin.Models.DataModels.Product>
+@{
+    int stt = ViewBag.STT;
+    Helpers h = new Helpers();
+}
+
+<span style="color:#ff0000; font-weight:bold">Total: @ViewBag.TotalRow row(s)</span>
+<div class="frame">
+
+    <div class="card card--table1">
+        <div class="card-hScroll">
+            <table>
+                <thead>
+                    <tr>
+                        
+                        <th style="width:30px">STT</th>
+                        <th>Mã Sản phẩm</th>
+                        <th style="width:200px">Tên Sản phẩm</th>
+                        <th>Danh Mục Cấp 1</th>
+                        <th>Danh Mục Cấp 2</th>
+                        <th>Hình đại diện</th>
+                        <th style="width:60px">Sản phẩm<br /> mới</th>
+                        <th style="width:60px">Hiện thị<br />Website</th>
+                        <th style="width:60px">Lượt <br /> Xem</th>
+                        <th>Tạo lúc</th>
+                        <th>SEO Keywords</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+            </table>
+
+            <div class="card-vScroll">
+                <table class="table table-striped table-hover xcont">
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        
+                        <td style="width:30px">@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductCode)
+                        </td>
+                        <td style="width:200px">
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category1.CategoryName)
+                        </td>
+
+                        
+                        <td>
+                            <img alt="@item.ProductName" style="height:50px" src="~/@WebConstants.ImgProductShow/@item.Images" />
+                           
+                        </td>
+                        
+                        <td style="width:60px">
+                            
+                            @if (item.IsNew == true)
+                            {
+                                <span class="badge badge-danger">SP Mới</span>
+                            }
+                            else
+                            {
+                                <span></span>
+                            }
+
+                        </td>
+                        
+                        <td style="width:60px">
+                            @if (item.IsActive == true)
+                            {
+                                <span class="badge badge-success">Hiện thị</span>
+                            }
+                            else
+                            {
+                                <span class="badge">Ẩn</span>
+                            }
+                        </td>
+                        <td style="width:60px"> 
+                            @Html.DisplayFor(modelItem => item.CountView)
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(item.Created).ToString(WebConstants.DatetimeFormatVI)
+                        </td>
+                        
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SEOKeywords)
+                        </td>
+                       
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <div class="dataTables_paginate paging_bootstrap_full_number pull-right" id="sample_1_paginate">
+            @Html.PagedListPager(Model, pageNumber => Url.Action("_PartialIndex",
+               new
+               {
+                   pageNumber,
+                   pageSize = ViewBag.pageSize,
+                   SanPham = ViewBag.SanPham,
+                   DanhMucCha = ViewBag.DanhMucCha,
+                   SEOKeywords = ViewBag.SEOKeywords
+               }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayItemSliceAndTotal = true
+                }, new AjaxOptions()
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "season-list"
+                }))
+        </div>
+
+        <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+    </div>
+</div>

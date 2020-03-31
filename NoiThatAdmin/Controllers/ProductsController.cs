@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using NoiThatAdmin.Models.DataModels;
 using NoiThatAdmin.Utilities;
+using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
@@ -22,8 +23,53 @@ namespace NoiThatAdmin.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            ViewData["ListCate"] = db.Categories.ToList();
             var products = db.Products.Include(p => p.Category).Include(p => p.Category1);
             return View(products.ToList());
+        }
+
+        public ActionResult _PartialIndex(int? pageNumber, int? pageSize, string SanPham, int? DanhMucCha,
+                                          string SEOKeywords)
+        {
+            SanPham = SanPham ?? "";
+            ViewBag.SanPham = SanPham;
+            pageNumber = pageNumber ?? 1;
+            pageSize = pageSize ?? 10;
+
+            if (pageSize == -1)
+            {
+                pageSize = db.Products.ToList().Count;
+            }
+            ViewBag.PageSize = pageSize;
+
+            var lstprod = db.Products.ToList();
+            if (!string.IsNullOrEmpty(SanPham))
+            {
+                lstprod = lstprod.Where(s => s.ProductName.ToUpper().Contains(SanPham.ToUpper())).ToList();
+            }
+            ViewBag.SanPham = SanPham;
+
+            if (!string.IsNullOrEmpty(DanhMucCha.ToString()))
+            {
+                lstprod = lstprod.Where(s => s.CategoryIDParent == DanhMucCha).ToList();
+            }
+            ViewBag.DanhMucCha = DanhMucCha;
+
+            if (!string.IsNullOrEmpty(SEOKeywords))
+            {
+                lstprod = lstprod.Where(s => s.SEOKeywords.ToUpper().Contains(SEOKeywords.ToUpper())).ToList();
+            }
+            ViewBag.SEOKeywords = SEOKeywords;
+
+            lstprod = lstprod.OrderBy(s => s.Created).ToList();
+            ViewBag.STT = pageNumber * pageSize - pageSize + 1;
+            int count = lstprod.ToList().Count();
+            ViewBag.TotalRow = count;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Products/_PartialIndex.cshtml", lstprod.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
+            }
+            return View(lstprod.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
 
         // GET: Products/Details/5
@@ -44,7 +90,7 @@ namespace NoiThatAdmin.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryIDParent = new SelectList(db.Categories, "CategoryID", "CategoryName");
+            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName");
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         }
@@ -54,6 +100,7 @@ namespace NoiThatAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "ProductID,ProductCode,ProductName,Price,PriceSale,CategoryIDParent,CategoryID,Images,ShortDescription,Content,InStock,IsSale,IsNew,Rating,IsActive,CountView,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Product product,
                                    HttpPostedFileBase HinhAnh)
         {
@@ -85,14 +132,28 @@ namespace NoiThatAdmin.Controllers
                 product.Price = "0";
                 product.PriceSale = "0";
                 product.SEOUrlRewrite= Helpers.ConvertToUpperLower(product.ProductName);
+                product.Created = DateTime.Now;
+                product.CreatedBy = 1;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryIDParent = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryIDParent);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c=>c.Parent == 0), "CategoryID", "CategoryName", product.CategoryIDParent);
+            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
+        }
+
+        public JsonResult LoadMenuCap2(int ParentID)
+        {
+            //var tmp = from s in db.MODELDEVICEs
+            //          where s.IDCate == idCate
+            //          select s.NameModel;
+            //var sItems = new SelectList(tmp);
+            //return Json(sItems, JsonRequestBehavior.AllowGet);
+
+            var result = new SelectList(db.Categories.Where(m => m.Parent == ParentID), "CategoryID", "CategoryName");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         private void resizeImage(string path, string originalFilename,

@@ -369,6 +369,31 @@
     <Content Include="assets\plugins\pulsate\jQuery.pulsate.min.js" />
     <Content Include="assets\plugins\quicksearch\jquery.quicksearch.min.js" />
     <Content Include="assets\plugins\sparklines\jquery.sparklines.min.js" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.min.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.min.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.css" />
+    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.min.css" />
+    <Content Include="Content\blueimp-gallery2\img\error.png" />
+    <Content Include="Content\blueimp-gallery2\img\error.svg" />
+    <Content Include="Content\blueimp-gallery2\img\loading.gif" />
+    <Content Include="Content\blueimp-gallery2\img\play-pause.png" />
+    <Content Include="Content\blueimp-gallery2\img\play-pause.svg" />
+    <Content Include="Content\blueimp-gallery2\img\video-play.png" />
+    <Content Include="Content\blueimp-gallery2\img\video-play.svg" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload.css" />
+    <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
+    <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -418,6 +443,10 @@
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-gallery.min.js.map" />
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-helper.min.js.map" />
     <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.min.js.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\client.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -474,6 +503,7 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\_PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

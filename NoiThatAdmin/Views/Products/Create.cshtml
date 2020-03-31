@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,15 +17,8 @@
         <h1>Tạo mới Sản phẩm</h1>
         <div class="options">
             <div class="btn-toolbar">
-                <div class="btn-group hidden-xs">
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cloud-download"></i><span class="hidden-sm"> Export as  </span><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Text File (*.txt)</a></li>
-                        <li><a href="#">Excel File (*.xlsx)</a></li>
-                        <li><a href="#">PDF File (*.pdf)</a></li>
-                    </ul>
-                </div>
-                <a href="#" class="btn btn-default"><i class="fa fa-cog"></i></a>
+                <input type="submit" value="Lưu mới" class="btn btn-success" />
+                <a href="/Products/Index" class="btn btn-primary">Quay Lại</a>
             </div>
         </div>
     </div>
@@ -37,7 +30,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                @*<img src="assets/demo/avatar/johansson.png" alt="" class="pull-left" style="margin: 0 20px 20px 0">*@
+                                @*<img src="~/assets/demo/avatar/johansson.png" alt="" class="pull-left" style="margin: 0 20px 20px 0">*@
                                 <div class="form-horizontal">
 
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -60,7 +53,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.CategoryIDParent, "Danh Mục Cha", htmlAttributes: new { @class = "control-label col-md-3" })
                                         <div class="col-md-9">
-                                            @Html.DropDownList("CategoryIDParent", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownList("CategoryIDParent", null, "--Chọn Danh Mục Cha--", htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.CategoryIDParent, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -68,7 +61,8 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.CategoryID, "Chủng loại SP", htmlAttributes: new { @class = "control-label col-md-3" })
                                         <div class="col-md-9">
-                                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                            <select class="form-control" data-val="true" id="CategoryID" name="CategoryID"></select>
+                                            
                                             @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -181,7 +175,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-3" })
                                         <div class="col-md-9">
-                                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" rows="4"></textarea>
+                                            <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="4"></textarea>
                                             @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -198,7 +192,8 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane clearfix active" id="home1">
-                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                            <textarea id="Content" name="Content"></textarea>
+                                            @*@Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })*@
                                             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
 
                                         </div>
@@ -288,9 +283,55 @@
     <script type="text/javascript">
         CKEDITOR.replace("Content",
             {
-
+                height: '500px'
             });
         CKFinder.setupCKEditor(null, '/ckfinder')
+
+        $(document).ready(function () {
+
+            $("#ProductName").focusout(function () {
+                var ProductName = $("#ProductName").val();
+                $("#SEOTitle").val(ProductName);
+            });
+
+            //
+            $("#CategoryID").prop("disabled", true);
+            $(function () {
+                $('#CategoryIDParent').change(function () {
+                    $("#CategoryID").prop("disabled", false);
+                    var ParentID = $('#CategoryIDParent').val();
+                    //var selectedBrand = $('#IDBrand').val(); IDMenu
+                    var clearmoldid = $("#CategoryID");
+                    clearmoldid.empty();
+                    if (ParentID == null || ParentID == "") {
+                        $('#CategoryID').prop('disabled', true);
+                    }
+                    else {
+                        $.ajax(
+                            {
+                                url: "/Products/LoadMenuCap2",
+                                type: 'GET',
+                                cache: false,
+                                data: { ParentID: ParentID },
+                                
+                                success: function (data) {
+                                    var optionhtml1 = '<option value="' +
+                                        0 + '">' + "--Chọn Menu Cấp con--" + '</option>';
+                                    $('#CategoryID').append(optionhtml1);
+
+                                    $.each(data, function (i) {
+
+                                        var optionhtml = '<option value="' +
+                                            data[i].Value + '">' + data[i].Text + '</option>';
+                                        $('#CategoryID').append(optionhtml);
+                                    });
+                                }
+                            });
+                    }
+
+                });
+            });
+        });
     </script>
 
 }

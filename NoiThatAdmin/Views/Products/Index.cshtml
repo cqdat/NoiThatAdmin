@@ -3,151 +3,120 @@
 @{
     ViewBag.Title = "Index";
 }
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Danh sách Sản phẩm</li>
 
-<h2>Index</h2>
+    </ol>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category1.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriceSale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Images)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InStock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsNew)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountView)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEOTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEOUrlRewrite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEOKeywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEOMetadescription)
-        </th>
-        <th></th>
-    </tr>
+    <h1>DS Sản phẩm</h1>
+    <div class="options">
+        <div class="btn-toolbar">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category1.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceSale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Images)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InStock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsNew)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountView)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEOTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEOUrlRewrite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEOKeywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEOMetadescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
-        </td>
-    </tr>
+            <a href="Products/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding:5px">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-1">
+                Hiện thị<br />
+                <select name="sample_2_length" aria-controls="sample_2" class="form-control input-xsmall input-inline select2-offscreen" tabindex="-1" title="" id="ddlPageSize">
+                    <option value="5">5 dòng</option>
+                    <option value="10">10 dòng</option>
+                    <option value="15" selected>15 dòng</option>
+                    <option value="20">20 dòng</option>
+                    <option value="-1">Tất cả</option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                Tên chủng loại<br />
+                <input type="text" id="txtSanPham" name="txtSanPham" class="form-control txtSearch" placeholder="Nhập tên...">
+            </div>
+            <div class="col-xs-2">
+                Danh Mục Cha<br />
+
+                <select class="form-control drChange" id="ParentId" name="ParentId">
+                    <option value="">Tất cả</option>
+                    <option value="0">Menu Cha</option>
+                    @foreach (var i in (List<NoiThatAdmin.Models.DataModels.Category>)ViewData["ListCate"])
+                    {
+                        <option value="@i.CategoryID">@i.CategoryName</option>
+                    }
+
+                </select>
+            </div>
+            <div class="col-xs-4">
+                Tìm theo từ khóa
+                <br />
+                <input type="text" id="SEOKeywords" class="form-control txtSearch" placeholder="nhập từ khóa">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        @*@{ Html.RenderPartial("_Alerts"); }*@
+        <div class="panel-body" style="padding:0px;">
+
+            <div class="row" id="season-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+         $.ajaxSetup({
+                cache: false
+         });
+
+        filter();
+
+        $('body').on('change', '#ddlPageSize', function () {
+            filter();
+        });
+
+        //textbox name
+        $('.txtSearch').on('input', function () {
+            filter();
+        });
+
+        //Drop change Dept
+            $('.drChange').change(function () {
+                filter();
+            });
+
+    });
+
+    function filter() {
+
+        var SanPham = $("#txtSanPham").val();
+        var DanhMucCha = $("#ParentId").val();
+        var SEOKeywords = $("#SEOKeywords").val();
+        $.ajax({
+            //url: '/BDS_TinTuc/_PartialIndex',
+            url: '@Url.Action("_PartialIndex", "Products", new { area = "Cpanel" })',
+            data: {
+                pageSize: parseInt($('#ddlPageSize').val()),
+                SanPham: SanPham,
+                DanhMucCha: DanhMucCha,
+                SEOKeywords:SEOKeywords
+            },
+            method: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('#season-list').html(data);
+                $("#lbl_Message").html("");
+            }
+        });
+
+    }
+    </script>
 }
-
-</table>
