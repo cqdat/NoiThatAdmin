@@ -21,8 +21,8 @@ namespace NoiThatAdmin.Controllers
         }
 
         private string UrlBase = "/Media/Upload/";
-        String DeleteURL = "/ProductImage/DeleteFile/?file=";
-        String DeleteType = "GET";
+        string DeleteURL = "/ProductImage/DeleteFile/?file=";
+        string DeleteType = "GET";
         public ProductImageController()
         {
             h = new FilesHelper(DeleteURL, DeleteType, StorageRoot, UrlBase, tempPath, serverMapPath);
@@ -37,24 +37,15 @@ namespace NoiThatAdmin.Controllers
         [HttpPost]
         public JsonResult Upload()
         {
-            int galleryid = 0;
-            try
-            {
-                galleryid = Convert.ToInt32(Session["galleryid"]);
-            }
-            catch
-            {
-                galleryid = 1;
-            }
+            int productid = 1;
+
             var resultList = new List<ViewDataUploadFilesResult>();
 
             var CurrentContext = HttpContext;
 
-            h.UploadAndShowResults(CurrentContext, resultList, galleryid);
+            h.UploadAndShowResults(CurrentContext, resultList, productid);
 
             JsonFiles files = new JsonFiles(resultList);
-
-
 
             bool isEmpty = !resultList.Any();
             if (isEmpty)
