@@ -137,17 +137,20 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SlideController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Category.cs" />
+    <Compile Include="Models\DataModels\Product.cs" />
     <Compile Include="Models\DataModels\TanThoiEntities.cs" />
     <Compile Include="Models\FilesHelper.cs" />
     <Compile Include="Models\ImageHandler.cs" />
     <Compile Include="Models\JsonFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Helpers.cs" />
+    <Compile Include="Utilities\WebConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\styles.minc726.css" />
@@ -366,27 +369,9 @@
     <Content Include="assets\plugins\pulsate\jQuery.pulsate.min.js" />
     <Content Include="assets\plugins\quicksearch\jquery.quicksearch.min.js" />
     <Content Include="assets\plugins\sparklines\jquery.sparklines.min.js" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.css" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.min.css" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.css" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.min.css" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.css" />
-    <Content Include="Content\blueimp-gallery2\css\blueimp-gallery.min.css" />
-    <Content Include="Content\blueimp-gallery2\img\error.png" />
-    <Content Include="Content\blueimp-gallery2\img\error.svg" />
-    <Content Include="Content\blueimp-gallery2\img\loading.gif" />
-    <Content Include="Content\blueimp-gallery2\img\play-pause.png" />
-    <Content Include="Content\blueimp-gallery2\img\play-pause.svg" />
-    <Content Include="Content\blueimp-gallery2\img\video-play.png" />
-    <Content Include="Content\blueimp-gallery2\img\video-play.svg" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Media\Upload\0d6b7611-2cb6-49d0-9527-f7e3411bea84_2014ebd9ebce-8c8e-46ec-8fc4-4a27a8a7a544.gif" />
     <Content Include="Media\Upload\4351de4e-e990-467b-a408-48f41683df97_7887_159309407575176_1944603233_n.jpg" />
     <Content Include="Media\Upload\73cbf165-3031-4232-991b-9823d1feb55d_79b7908622a16186f74b201ef0aeaceb_46199219_014quachdaicahocadoc.jpg" />
@@ -484,9 +469,16 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\_PartialIndex.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Photos\Collections\_thumbs\" />
+    <Folder Include="Photos\Products\_thumbs\" />
     <Folder Include="Views\Slide\" />
   </ItemGroup>
   <ItemGroup>
@@ -494,10 +486,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
